@@ -32,7 +32,7 @@ class BaseTest(unittest.TestCase):
             options = webdriver.ChromeOptions()
             options.add_argument("--no-sandbox")
             options.add_argument("--headless")
-            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--window-size=1920,1080'")
             self.driver = webdriver.Chrome(options=options)
 
         elif self.browser == "firefox":
@@ -99,4 +99,4 @@ class BaseTest(unittest.TestCase):
 
     @staticmethod
     def rand_string(size=10):
-        return str(uuid.uuid4()).replace("-", "")[1:10]
+        return str(uuid.uuid4()).replace("-", "")[1:size]
