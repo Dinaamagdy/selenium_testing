@@ -18,8 +18,8 @@ class BaseTest(unittest.TestCase):
         self.browser = config["main"]["browser"]
         self.alerta_page = self.url + "/alerta"
         self.myjobs_page = self.url + "/myjobs"
-        self.blog = self.url + "blog"
-        self.pastebin = self.url + "pastebin"
+        self.blog_page = self.url + "blog"
+        self.pastebin_page = self.url + "pastebin"
         self._testID = self._testMethodName
         self._startTime = time.time()
         self.set_browser()
