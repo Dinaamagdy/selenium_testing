@@ -60,7 +60,7 @@ class Pastebin(BaseTest):
 
         ipdb.set_trace()
         code_input = self.find_element("code_input")
-        code_input.send_keys(code_input)
+        code_input.send_keys(python_script)
 
         self.info("Click on submit button ")
         submit_button = self.find_element("submit_button")
@@ -96,7 +96,7 @@ class Pastebin(BaseTest):
         """
         self.info("Add Python code to code input.")
         code_input = self.find_element("code_input")
-        code_input.send_keys(code_input)
+        code_input.send_keys(python_script)
 
         self.info("Click on submit button ")
         self.find_element("submit_button").click()
@@ -128,7 +128,7 @@ class Pastebin(BaseTest):
         """
         self.info("Add Python code to code input.")
         code_input = self.find_element("code_input")
-        code_input.send_keys(code_input)
+        code_input.send_keys(python_script)
 
         self.info("Click on submit button ")
         self.find_element("submit_button").click()
@@ -160,7 +160,7 @@ class Pastebin(BaseTest):
         """
         self.info("Add Python code to code input.")
         code_input = self.find_element("code_input")
-        code_input.send_keys(code_input)
+        code_input.send_keys(python_script)
 
         self.info("Click on submit button ")
         self.find_element("submit_button").click()

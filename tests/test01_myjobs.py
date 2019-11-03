@@ -9,6 +9,7 @@ import random
 
 class Jobs(BaseTest):
     def setUp(self):
+        super().setUp()
         self.get_page(self.myjobs_page)
         self.assertIn("Myjobs Visualizer", self.driver.title)
         self.assertTrue(self.wait_until_element_located("Jobs_bage"))
@@ -74,8 +75,7 @@ class Jobs(BaseTest):
             self.assertEqual("There is no Jobs matching your criteria", self.find_element("no_jobs").text)
         else:
             table_rows = self.get_table_rows("jobs_table")
-            for i in range(len(table_rows)):        filter_element.click()
-
+            for i in range(len(table_rows)):
                 self.assertEqual(state, self.get_table_row("jobs_table", i)[3])
             self.assertEqual(len(table_rows), filtered_jobs)
 
@@ -104,6 +104,7 @@ class Jobs(BaseTest):
 
 class workers(BaseTest):
     def setUp(self):
+        super().setUp()
         self.get_page(self.myjobs_page)
         self.assertIn("Myjobs Visualizer", self.driver.title)
         self.assertTrue(self.wait_until_element_located("workers_bage"))

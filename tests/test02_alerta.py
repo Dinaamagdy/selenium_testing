@@ -11,13 +11,11 @@ from Jumpscale import j
 
 class alerta(BaseTest):
     def setUp(self):
+        super().setUp()
         self.get_page(self.alerta_page)
         self.assertIn("Alerta", self.driver.title)
         self.assertTrue(self.wait_until_element_located("alerts_table"))
         self.rows_count = len(self.get_table_rows("alerts_table"))
-
-    def tearDown(self):
-        self.driver.close()
 
     def test001_ALL_filter(self):
         """
