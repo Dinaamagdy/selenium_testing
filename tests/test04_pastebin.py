@@ -6,7 +6,6 @@ import unittest, time, os
 from .base_test import BaseTest
 from parameterized import parameterized
 import random, pyperclip
-from Jumpscale import j
 
 python_script = """
     # Solve the quadratic equation ax**2 + bx + c = 0
@@ -35,13 +34,15 @@ CODE_LAST_LINE = "print('The solution are {0} and {1}'.format(sol1,sol2))"
 
 class Pastebin(BaseTest):
     def setUp(self):
+        super().setUp()
         self.get_page(self.pastebin_page)
+
         self.info("get pastebin page. ")
-        self.assertIn("pastebin", self.driver.title)
+        self.assertIn("pastebin", self.driver.current_url)
         self.assertTrue(self.wait_until_element_located("pastebin_header"))
 
     def tearDown(self):
-        self.driver.close()
+        super().setUp()
 
     def test01_create_new_paste(self):
         """
@@ -55,6 +56,9 @@ class Pastebin(BaseTest):
         - Check that link contain right code.
         """
         self.info("Add Python code to code input.")
+        import ipdb
+
+        ipdb.set_trace()
         code_input = self.find_element("code_input")
         code_input.send_keys(code_input)
 
