@@ -8,18 +8,19 @@ from selenium.common.exceptions import NoSuchElementException
 from parameterized import parameterized
 
 
-class Blogd(BaseTest):
+class Blog(BaseTest):
     def setUp(self):
+        super().setUp()
         self.get_page(self.blog_page)
         self.assertIn("Blogs", self.driver.title)
         self.assertTrue(self.wait_until_element_located("blogs_list"))
         self.get_blogs_number()
 
     def tearDown(self):
-        self.driver.close()
+        super().setUp()
 
     def get_blogs_number(self):
-        self.blogs = self.driver.find_element("blogs_list")
+        self.blogs = self.find_element("blogs_list")
         self.rows = self.blogs.find_elements_by_class_name("row")
         self.columns = []
         if self.rows:
@@ -105,7 +106,7 @@ class Blogd(BaseTest):
         - Test [About, Contact, Tags] in navigation bar elements [about]. 
         """
         self.info("Get one of blogs posts")
-        self.get_random_blog()
+        self.open_random_blog()
         self.assertIn("posts", self.driver.current_url)
 
         self.info("Test about in navigation bar elements")
@@ -132,8 +133,8 @@ class Blogd(BaseTest):
         - Get tags page, get one of tags[TAG].
         - Check that posts have [TAG].
         """
-        self.info("Get one of blogs posts")
-        self.get_random_blog()
+        self.info("Open one of blogs posts")
+        self.open_random_blog()
         self.assertIn("posts", self.driver.current_url)
 
         self.info("Get tags page, get one of tags[TAG].")
@@ -163,8 +164,13 @@ class Blogd(BaseTest):
         - Get one of blogs posts .
         - Click on one of icons check it redirect to right page.
         """
-        self.info("Get one of blogs posts")
-        self.get_random_blog()
+        import ipdb
+
+        ipdb.set_trace()
+        if icon == "instagram":
+            self.skipTest("https://github.com/threefoldtech/jumpscaleX_threebot/issues/179")
+        self.info("oprn one of blogs posts")
+        self.open_random_blog()
         self.assertIn("posts", self.driver.current_url)
 
         categories_pages = self.find_element("categories_pages")

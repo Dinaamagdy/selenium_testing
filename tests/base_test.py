@@ -3,7 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from testconfig import config
 import unittest, time, uuid
 from loguru import logger
-from Elements import elements
+from .Elements import elements
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -12,20 +12,22 @@ class BaseTest(unittest.TestCase):
     LOGGER = logger
     LOGGER.add("myjobs_{time}.log")
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.url = config["main"]["url"]
-        self.browser = config["main"]["browser"]
-        self.alerta_page = self.url + "/alerta"
-        self.myjobs_page = self.url + "/myjobs"
-        self.blog_page = self.url + "blog"
-        self.pastebin_page = self.url + "pastebin"
-        self._testID = self._testMethodName
-        self._startTime = time.time()
-        self.set_browser()
+    @classmethod
+    def setUpClass(CLS):
+        url = config["main"]["url"]
+        BaseTest.browser = config["main"]["browser"]
+        BaseTest.alerta_page = url + "/alerta"
+        BaseTest.myjobs_page = url + "/myjobs"
+        BaseTest.blog_page = url + "/blog"
+        BaseTest.pastebin_page = url + "/pastebin"
 
+    def setUp(self):
+        self.set_browser()
         self.driver.set_window_size(1800, 1000)
         self.wait = WebDriverWait(self.driver, 15)
+
+    def tearDown(self):
+        self.driver.close()
 
     def set_browser(self):
         if self.browser == "chrome":

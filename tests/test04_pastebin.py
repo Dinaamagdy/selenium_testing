@@ -140,6 +140,8 @@ class Pastebin(BaseTest):
         f = open(file_dir, "r")
         content = f.read()
         self.assertIn(CODE_FIRST_LINE, content)
+        f.close()
+        os.remove(f.name)
 
     @unittest.skip("https://github.com/threefoldtech/jumpscaleX_threebot/issues/172")
     def test04_copy_code(self):
@@ -157,7 +159,7 @@ class Pastebin(BaseTest):
         code_input.send_keys(code_input)
 
         self.info("Click on submit button ")
-        self.find_element("submit_button")click()
+        self.find_element("submit_button").click()
 
         self.info("Click on copy code button.")
         self.find_element("copy_code").click()
