@@ -16,9 +16,6 @@ class Blog(BaseTest):
         self.assertTrue(self.wait_until_element_located("blogs_list"))
         self.get_blogs_number()
 
-    def tearDown(self):
-        super().setUp()
-
     def get_blogs_number(self):
         self.blogs = self.find_element("blogs_list")
         self.rows = self.blogs.find_elements_by_class_name("row")

@@ -4,3 +4,4 @@ nose-testconfig
 loguru
 webdriver-manager
 pyperclip
+npm

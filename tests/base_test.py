@@ -6,14 +6,24 @@ from loguru import logger
 from .Elements import elements
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from Jumpscale import j
+
+ALERTA_ACTOR = "/sandbox/code/github/threefoldtech/jumpscaleX_threebot/ThreeBotPackages/zerobot/alerta"
+BLOG_ACTOR = "/sandbox/code/github/threefoldtech/jumpscaleX_threebot/ThreeBotPackages/threebot/blog"
+PASTEBIN_ACTOR = "/sandbox/code/github/threefoldtech/jumpscaleX_threebot/ThreeBotPackages/demo/pastebin"
+BLOG_EXAMPLE = "git@gitlab.com:xmonader/sample-blog-jsx.git"
 
 
 class BaseTest(unittest.TestCase):
     LOGGER = logger
-    LOGGER.add("myjobs_{time}.log")
+    LOGGER.add("backages_{time}.log")
 
     @classmethod
     def setUpClass(CLS):
+        BaseTest.blog_name = BaseTest.rand_string()
+        j.tools.blog_loader.add_blog(BaseTest.blog_name, BLOG_EXAMPLE)
+        gedis_client = j.servers.threebot.local_start_default(web=True, timeout=1000)
+        BaseTest.add_actors(gedis_client)
         url = config["main"]["url"]
         BaseTest.browser = config["main"]["browser"]
         BaseTest.alerta_page = url + "/alerta"
@@ -28,6 +38,13 @@ class BaseTest(unittest.TestCase):
 
     def tearDown(self):
         self.driver.close()
+
+    @staticmethod
+    def add_actors(gedis_client):
+        gedis_client.actors.package_manager.package_add(path=ALERTA_ACTOR)
+        gedis_client.actors.package_manager.package_add(path=BLOG_ACTOR)
+        gedis_client.actors.package_manager.package_add(path=PASTEBIN_ACTOR)
+        gedis_client.reload()
 
     def set_browser(self):
         if self.browser == "chrome":
