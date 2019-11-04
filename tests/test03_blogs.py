@@ -8,6 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 from parameterized import parameterized
 
 
+@unittest.skip("https://github.com/threefoldtech/jumpscaleX_threebot/issues/188")
 class Blog(BaseTest):
     def setUp(self):
         super().setUp()

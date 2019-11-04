@@ -20,8 +20,8 @@ class BaseTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(CLS):
+        BaseTest.info("add packages actors.")
         BaseTest.blog_name = BaseTest.rand_string()
-        j.tools.blog_loader.add_blog(BaseTest.blog_name, BLOG_EXAMPLE)
         gedis_client = j.servers.threebot.local_start_default(web=True, timeout=1000)
         BaseTest.add_actors(gedis_client)
         url = config["main"]["url"]
@@ -41,6 +41,7 @@ class BaseTest(unittest.TestCase):
 
     @staticmethod
     def add_actors(gedis_client):
+        j.tools.blog_loader.add_blog(BaseTest.blog_name, BLOG_EXAMPLE)
         gedis_client.actors.package_manager.package_add(path=ALERTA_ACTOR)
         gedis_client.actors.package_manager.package_add(path=BLOG_ACTOR)
         gedis_client.actors.package_manager.package_add(path=PASTEBIN_ACTOR)

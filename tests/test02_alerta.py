@@ -9,6 +9,7 @@ import random
 from Jumpscale import j
 
 
+@unittest.skip("https://github.com/threefoldtech/jumpscaleX_threebot/issues/185")
 class alerta(BaseTest):
     def setUp(self):
         super().setUp()

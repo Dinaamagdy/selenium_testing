@@ -7,6 +7,7 @@ from parameterized import parameterized
 import random
 
 
+@unittest.skip("https://github.com/threefoldtech/jumpscaleX_threebot/issues/185")
 class Jobs(BaseTest):
     def setUp(self):
         super().setUp()
@@ -102,6 +103,7 @@ class Jobs(BaseTest):
         self.assertEqual(job_data[3], state)
 
 
+@unittest.skip("https://github.com/threefoldtech/jumpscaleX_threebot/issues/185")
 class workers(BaseTest):
     def setUp(self):
         super().setUp()
